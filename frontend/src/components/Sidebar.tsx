@@ -9,30 +9,6 @@ import type { GHStatus } from '../wailsjs/go/main/App';
 
 // Ícones inline SVG para performance
 const Icons = {
-  createAMI: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="3" y="3" width="18" height="18" rx="2" />
-      <path d="M12 8v8M8 12h8" />
-    </svg>
-  ),
-  promotionAMI: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 19V5M5 12l7-7 7 7" />
-    </svg>
-  ),
-  authToken: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-    </svg>
-  ),
-  sessionInfo: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="10" />
-      <line x1="12" y1="16" x2="12" y2="12" />
-      <line x1="12" y1="8" x2="12.01" y2="8" />
-    </svg>
-  ),
   devTools: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
@@ -46,7 +22,7 @@ const Icons = {
 };
 
 // Tipos de página disponíveis
-export type PageType = 'create-ami' | 'promotion-ami' | 'auth-longtoken' | 'session-info' | 'dev-tools';
+export type PageType = 'dev-tools';
 
 interface SidebarProps {
   currentPage: string;
@@ -56,18 +32,6 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ currentPage, onNavigate, ghStatus, isCheckingGh }: SidebarProps) {
-  // Itens de navegação - Deploy AMI
-  const deployItems: { id: PageType; label: string; icon: JSX.Element }[] = [
-    { id: 'create-ami', label: 'Create AMI', icon: Icons.createAMI },
-    { id: 'promotion-ami', label: 'Promotion AMI', icon: Icons.promotionAMI },
-  ];
-
-  // Itens de autenticação Onvio
-  const authItems: { id: PageType; label: string; icon: JSX.Element }[] = [
-    { id: 'auth-longtoken', label: 'Gerar LongToken', icon: Icons.authToken },
-    { id: 'session-info', label: 'Informações da Sessão', icon: Icons.sessionInfo },
-  ];
-
   // Itens de Ferramentas Dev
   const devToolsItems: { id: PageType; label: string; icon: JSX.Element }[] = [
     { id: 'dev-tools', label: 'Geradores & Formatadores', icon: Icons.devTools },
@@ -85,42 +49,6 @@ export default function Sidebar({ currentPage, onNavigate, ghStatus, isCheckingG
 
       {/* Navegação */}
       <nav className="sidebar-nav">
-        {/* Seção Deploy */}
-        <div className="nav-section">
-          <div className="nav-section-title">Deploy AMI</div>
-          {deployItems.map((item) => (
-            <div
-              key={item.id}
-              className={`nav-item ${currentPage === item.id ? 'active' : ''}`}
-              onClick={() => onNavigate(item.id)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' && onNavigate(item.id)}
-            >
-              <div className="nav-item-icon">{item.icon}</div>
-              {item.label}
-            </div>
-          ))}
-        </div>
-
-        {/* Seção Autenticação Onvio */}
-        <div className="nav-section">
-          <div className="nav-section-title">Autenticação Onvio</div>
-          {authItems.map((item) => (
-            <div
-              key={item.id}
-              className={`nav-item ${currentPage === item.id ? 'active' : ''}`}
-              onClick={() => onNavigate(item.id)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' && onNavigate(item.id)}
-            >
-              <div className="nav-item-icon">{item.icon}</div>
-              {item.label}
-            </div>
-          ))}
-        </div>
-
         {/* Seção Ferramentas Dev */}
         <div className="nav-section">
           <div className="nav-section-title">Ferramentas Dev</div>

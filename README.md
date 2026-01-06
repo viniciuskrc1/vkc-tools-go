@@ -1,23 +1,10 @@
 # VKC Tools
 
-Aplicação desktop moderna e performática para automação de workflows do OnvioBR, construída com **Go + Wails + React**.
+Aplicação desktop moderna e performática de varios utilitários, construída com **Go + Wails + React**.
 
 ![VKC Tools Screenshot](docs/screenshot.png)
 
 ## 📋 Funcionalidades
-
-### OnvioBR - Create AMI
-Cria novas AMIs (Amazon Machine Images) para serviços específicos.
-- **Multi-select**: Selecione múltiplas verticais (287 disponíveis)
-- **Busca em tempo real**: Filtre rapidamente entre os serviços
-- **Execução em paralelo**: Dispara workflows simultaneamente
-- **Progresso detalhado**: Acompanhe o status de cada disparo
-
-### OnvioBR - Promotion AMI
-Promove AMIs existentes para ambientes de lab ou qa.
-- **Single-select**: Selecione uma vertical por vez
-- **Ambientes**: lab-lab01 ou qa-qa01
-- **Feedback imediato**: Resultado da promoção em tempo real
 
 ## 🔧 Pré-requisitos
 
@@ -99,9 +86,6 @@ vkc-tools-go/
 │   │   ├── main.tsx        # Entry point React
 │   │   ├── components/     # Componentes React
 │   │   │   ├── Sidebar.tsx
-│   │   │   ├── CreateAMI.tsx
-│   │   │   ├── PromotionAMI.tsx
-│   │   │   ├── ServiceSelector.tsx
 │   │   │   ├── Toast.tsx
 │   │   │   └── ConfirmModal.tsx
 │   │   ├── data/

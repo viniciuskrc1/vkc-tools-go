@@ -2,7 +2,7 @@
  * VKC Tools - Aplicação Desktop para Automação de Workflows
  * 
  * Esta aplicação fornece uma interface moderna e performática para
- * disparar workflows do GitHub Actions para o projeto OnvioBR.
+ * geradores e formatadores úteis.
  */
 
 import { useState, useEffect, useCallback } from 'react';
@@ -11,15 +11,11 @@ import type { GHStatus } from './wailsjs/go/main/App';
 
 // Componentes
 import Sidebar, { type PageType } from './components/Sidebar';
-import CreateAMI from './components/CreateAMI';
-import PromotionAMI from './components/PromotionAMI';
-import AuthOnvio from './components/AuthOnvio';
-import SessionInfo from './components/SessionInfo';
 import DevTools from './components/DevTools';
 import ToastContainer, { useToast } from './components/Toast';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<PageType>('create-ami');
+  const [currentPage, setCurrentPage] = useState<PageType>('dev-tools');
   const [ghStatus, setGhStatus] = useState<GHStatus | null>(null);
   const [isCheckingGh, setIsCheckingGh] = useState(true);
   const { toasts, addToast, removeToast } = useToast();
@@ -73,18 +69,10 @@ function App() {
   // Renderizar página atual
   const renderPage = () => {
     switch (currentPage) {
-      case 'create-ami':
-        return <CreateAMI onToast={showToast} ghReady={ghStatus?.authenticated ?? false} />;
-      case 'promotion-ami':
-        return <PromotionAMI onToast={showToast} ghReady={ghStatus?.authenticated ?? false} />;
-      case 'auth-longtoken':
-        return <AuthOnvio onToast={showToast} />;
-      case 'session-info':
-        return <SessionInfo onToast={showToast} />;
       case 'dev-tools':
         return <DevTools onToast={showToast} />;
       default:
-        return <CreateAMI onToast={showToast} ghReady={ghStatus?.authenticated ?? false} />;
+        return <DevTools onToast={showToast} />;
     }
   };
 
