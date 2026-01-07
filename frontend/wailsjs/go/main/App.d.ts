@@ -8,6 +8,8 @@ export function ApplyCPFMask(arg1:string):Promise<string>;
 
 export function CheckGitHubCLI():Promise<main.GHStatus>;
 
+export function DecompressGzip(arg1:string):Promise<string>;
+
 export function FormatOnlyDigits(arg1:string):Promise<string>;
 
 export function GenerateCNPJ():Promise<main.DocumentResult>;
@@ -15,6 +17,8 @@ export function GenerateCNPJ():Promise<main.DocumentResult>;
 export function GenerateCPF():Promise<main.DocumentResult>;
 
 export function GenerateLoremIpsum(arg1:number):Promise<string>;
+
+export function GenerateRandomName():Promise<string>;
 
 export function GenerateUUID():Promise<string>;
 

@@ -32,6 +32,10 @@ export function GenerateLoremIpsum(arg1) {
   return window['go']['main']['App']['GenerateLoremIpsum'](arg1);
 }
 
+export function GenerateRandomName() {
+  return window['go']['main']['App']['GenerateRandomName']();
+}
+
 export function ApplyCPFMask(arg1) {
   return window['go']['main']['App']['ApplyCPFMask'](arg1);
 }
@@ -42,4 +46,8 @@ export function ApplyCNPJMask(arg1) {
 
 export function FormatOnlyDigits(arg1) {
   return window['go']['main']['App']['FormatOnlyDigits'](arg1);
+}
+
+export function DecompressGzip(arg1) {
+  return window['go']['main']['App']['DecompressGzip'](arg1);
 }

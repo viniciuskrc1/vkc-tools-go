@@ -21,6 +21,8 @@ export function GenerateCNPJ(): Promise<DocumentResult>;
 export function ValidateCNPJ(cnpj: string): Promise<DocumentResult>;
 export function GenerateUUID(): Promise<string>;
 export function GenerateLoremIpsum(paragraphs: number): Promise<string>;
+export function GenerateRandomName(): Promise<string>;
 export function ApplyCPFMask(digits: string): Promise<string>;
 export function ApplyCNPJMask(digits: string): Promise<string>;
 export function FormatOnlyDigits(input: string): Promise<string>;
+export function DecompressGzip(base64Gzip: string): Promise<string>;

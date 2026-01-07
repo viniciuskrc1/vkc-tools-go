@@ -320,3 +320,48 @@ func (a *App) GenerateLoremIpsum(paragraphs int) string {
 	return strings.Join(result, "\n\n")
 }
 
+// GenerateRandomName gera um nome aleatório brasileiro
+func (a *App) GenerateRandomName() string {
+	firstNames := []string{
+		"Maria", "Ana", "Fernanda", "Juliana", "Patricia", "Mariana", "Amanda", "Bruna", "Camila", "Carla",
+		"João", "Pedro", "Carlos", "Lucas", "Gabriel", "Rafael", "Felipe", "Bruno", "André", "Ricardo",
+		"Paulo", "Marcos", "Thiago", "Daniel", "Rodrigo", "Gustavo", "Eduardo", "Marcelo", "Fábio", "Leonardo",
+		"Beatriz", "Isabela", "Larissa", "Vanessa", "Renata", "Tatiana", "Priscila", "Monique", "Débora", "Luciana",
+		"Roberto", "Antonio", "José", "Francisco", "Paulo", "Marcelo", "Maurício", "Vinicius", "Henrique", "Diego",
+	}
+
+	secondNames := []string{
+		"Joana", "Silva", "Santos", "Oliveira", "Souza", "Rodrigues", "Ferreira", "Alves", "Pereira", "Lima",
+		"James", "Costa", "Ribeiro", "Martins", "Carvalho", "Almeida", "Lopes", "Soares", "Fernandes", "Gomes",
+		"Rocha", "Dias", "Moreira", "Araújo", "Mendes", "Freitas", "Barbosa", "Nunes", "Teixeira", "Monteiro",
+		"Cardoso", "Reis", "Machado", "Ramos", "Azevedo", "Cavalcanti", "Nascimento", "Moraes", "Campos", "Duarte",
+	}
+
+	surnames := []string{
+		"Silva", "Santos", "Oliveira", "Souza", "Rodrigues", "Ferreira", "Alves", "Pereira", "Lima", "Costa",
+		"Ribeiro", "Martins", "Carvalho", "Almeida", "Lopes", "Soares", "Fernandes", "Gomes", "Rocha", "Dias",
+		"Moreira", "Araújo", "Mendes", "Freitas", "Barbosa", "Nunes", "Teixeira", "Monteiro", "Cardoso", "Reis",
+		"Machado", "Ramos", "Azevedo", "Cavalcanti", "Nascimento", "Moraes", "Campos", "Duarte", "Correia", "Cunha",
+		"Pires", "Vieira", "Mendes", "Barros", "Castro", "Dantas", "Farias", "Guedes", "Leite", "Macedo",
+	}
+
+	// Escolher primeiro nome
+	firstName := firstNames[rand.Intn(len(firstNames))]
+
+	// 70% de chance de ter um segundo nome
+	hasSecondName := rand.Float32() < 0.7
+	var secondName string
+	if hasSecondName {
+		secondName = secondNames[rand.Intn(len(secondNames))]
+	}
+
+	// Escolher sobrenome
+	surname := surnames[rand.Intn(len(surnames))]
+
+	// Montar nome completo
+	if hasSecondName {
+		return fmt.Sprintf("%s %s %s", firstName, secondName, surname)
+	}
+	return fmt.Sprintf("%s %s", firstName, surname)
+}
+

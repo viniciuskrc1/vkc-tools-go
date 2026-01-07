@@ -2,8 +2,12 @@
 package main
 
 import (
+	"bytes"
+	"compress/gzip"
 	"context"
+	"encoding/base64"
 	"fmt"
+	"io"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -70,22 +74,6 @@ func findGitHubCLI() string {
 	}
 
 	return "gh" // Fallback para o nome simples (depende do PATH)
-}
-
-// WorkflowResult representa o resultado de um disparo de workflow
-type WorkflowResult struct {
-	Service string `json:"service"`
-	Success bool   `json:"success"`
-	Message string `json:"message"`
-	Error   string `json:"error,omitempty"`
-}
-
-// BatchResult representa o resultado de múltiplos disparos
-type BatchResult struct {
-	Total     int              `json:"total"`
-	Succeeded int              `json:"succeeded"`
-	Failed    int              `json:"failed"`
-	Results   []WorkflowResult `json:"results"`
 }
 
 // GHStatus representa o status do GitHub CLI
@@ -173,6 +161,34 @@ func (a *App) CheckGitHubCLI() GHStatus {
 
 	fmt.Printf("[INFO] GitHub CLI autenticado como: %s\n", status.User)
 	return status
+}
+
+// DecompressGzip descomprime um Gzip que está codificado em base64
+// Retorna o conteúdo descomprimido como string
+func (a *App) DecompressGzip(base64Gzip string) (string, error) {
+	// Remover espaços em branco
+	base64Gzip = strings.TrimSpace(base64Gzip)
+	
+	// Decodificar base64
+	gzipData, err := base64.StdEncoding.DecodeString(base64Gzip)
+	if err != nil {
+		return "", fmt.Errorf("erro ao decodificar base64: %v", err)
+	}
+
+	// Criar um reader para o gzip
+	gzipReader, err := gzip.NewReader(bytes.NewReader(gzipData))
+	if err != nil {
+		return "", fmt.Errorf("erro ao criar reader gzip: %v", err)
+	}
+	defer gzipReader.Close()
+
+	// Ler o conteúdo descomprimido
+	decompressedData, err := io.ReadAll(gzipReader)
+	if err != nil {
+		return "", fmt.Errorf("erro ao descomprimir gzip: %v", err)
+	}
+
+	return string(decompressedData), nil
 }
 
 

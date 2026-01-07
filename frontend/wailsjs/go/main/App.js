@@ -14,6 +14,10 @@ export function CheckGitHubCLI() {
   return window['go']['main']['App']['CheckGitHubCLI']();
 }
 
+export function DecompressGzip(arg1) {
+  return window['go']['main']['App']['DecompressGzip'](arg1);
+}
+
 export function FormatOnlyDigits(arg1) {
   return window['go']['main']['App']['FormatOnlyDigits'](arg1);
 }
@@ -28,6 +32,10 @@ export function GenerateCPF() {
 
 export function GenerateLoremIpsum(arg1) {
   return window['go']['main']['App']['GenerateLoremIpsum'](arg1);
+}
+
+export function GenerateRandomName() {
+  return window['go']['main']['App']['GenerateRandomName']();
 }
 
 export function GenerateUUID() {
