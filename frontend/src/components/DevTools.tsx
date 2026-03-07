@@ -21,6 +21,8 @@ import JsonTool from './JsonTool';
 import XmlTool from './XmlTool';
 import NameGenerator from './NameGenerator';
 import DecompressGzip from './DecompressGzip';
+import ExtractNfeAccessKey from './ExtractNfeAccessKey';
+import SumValues from './SumValues';
 
 // Ícones
 const Icons = {
@@ -187,10 +189,16 @@ const Icons = {
       <path d="M8 8l2 2-2 2M12 8h4M16 8l-2 2 2 2" />
       <path d="M8 16l2-2-2-2M12 16h4M16 16l-2-2 2-2" />
     </svg>
+  ),
+  sum: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <line x1="12" y1="5" x2="12" y2="19" />
+      <line x1="5" y1="12" x2="19" y2="12" />
+    </svg>
   )
 };
 
-type ToolTab = 'cpf' | 'cnpj' | 'uuid' | 'lorem' | 'json' | 'xml' | 'encode-file' | 'decode-file' | 'cep-search' | 'json-to-code' | 'name-generator' | 'decompress-gzip';
+type ToolTab = 'cpf' | 'cnpj' | 'uuid' | 'lorem' | 'json' | 'xml' | 'encode-file' | 'decode-file' | 'cep-search' | 'json-to-code' | 'name-generator' | 'decompress-gzip' | 'extract-nfe-key' | 'sum-values';
 
 interface DevToolsProps {
   onToast: (type: 'success' | 'error' | 'info', title: string, message: string) => void;
@@ -238,8 +246,10 @@ export default function DevTools({ onToast }: DevToolsProps) {
     { id: 'encode-file', label: 'Encode File', icon: Icons.encode, description: 'Converter arquivo para Base64', category: 'arquivos' },
     { id: 'decode-file', label: 'Decode File', icon: Icons.decode, description: 'Decodificar Base64 para imagem', category: 'arquivos' },
     { id: 'decompress-gzip', label: 'Descomprimir Gzip', icon: Icons.compress, description: 'Descomprimir Gzip codificado em Base64', category: 'arquivos' },
+    { id: 'extract-nfe-key', label: 'Extrair Chave NFe', icon: Icons.file, description: 'Extrair chaves de acesso de arquivos XML de notas fiscais', category: 'arquivos' },
     { id: 'cep-search', label: 'Buscar CEP', icon: Icons.map, description: 'Buscar informações de endereço por CEP', category: 'documentos' },
     { id: 'json-to-code', label: 'JSON para Código', icon: Icons.code, description: 'Converter JSON em classes Java ou interfaces TypeScript', category: 'codigo' },
+    { id: 'sum-values', label: 'Somar Valores', icon: Icons.sum, description: 'Somar uma lista de valores (um por linha)', category: 'texto' },
   ];
 
   const categories: { id: ToolCategory; label: string; icon: JSX.Element }[] = [
@@ -678,6 +688,16 @@ export default function DevTools({ onToast }: DevToolsProps) {
             {/* Decompress Gzip Tool */}
             {activeTab === 'decompress-gzip' && (
               <DecompressGzip onToast={onToast} />
+            )}
+
+            {/* Extract NFe Access Key Tool */}
+            {activeTab === 'extract-nfe-key' && (
+              <ExtractNfeAccessKey onToast={onToast} />
+            )}
+
+            {/* Sum Values Tool */}
+            {activeTab === 'sum-values' && (
+              <SumValues onToast={onToast} />
             )}
           </div>
         )}
